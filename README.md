@@ -23,9 +23,9 @@ The 2015 Risk Score is a simple average of 5 risks scores from 5 independent mod
 |   2C - Sherika    |   |   |   |   |
 |   3A - Manuel  |   |   |   |   | |
 
-## Steps After Replication of Phase 2
+## Steps After Replication of Phase 1 Models
 
-1. Cross Validation
+1. Cross Validation of Phase 1 Predictions with New data
 2. Improve/Update Index and models
 3. Update Map!
 
