@@ -7,6 +7,12 @@ In 2015, DataKind DC, the American Red Cross, and Enigma worked together to crea
 
 The final product was a Home Fire Risk <a href link="http://www.datakind.org/blog/american-red-cross-and-datakind-team-up-to-prevent-home-fire-deaths-and-injuries">Map</a>.
 
+## Phase 2 Road Map
+1. Replicate Phase 1 Models
+2. Cross Validation of Phase 1 Predictions with New data
+3. Improve/Update Index and models. We have new NFIRS, Red Cross, and ACS data that we would like to incorporate. We would like to consider adding new types of data as well such as climate data.
+4. Update the Home Fire Risk Map!
+
 ## How to Help in Phase 2
 
 The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 results. Phase 1's original GitHub repo is <a href link="https://github.com/DataKind-DC/smoke_alarm_models">here</a>. There are six models that the team is working to replicate, if you are interested in helping out on one, the Data Corps contact person is below.
@@ -23,11 +29,7 @@ The 2015 Risk Score is a simple average of 5 risks scores from 5 independent mod
 |   2C - Sherika    |   |   |   |   |
 |   3A - Manuel  |   |   |   |   | |
 
-## Steps After Replication of Phase 1 Models
 
-1. Cross Validation of Phase 1 Predictions with New data
-2. Improve/Update Index and models
-3. Update Map!
 
 ## DataKind DataCorps
 
