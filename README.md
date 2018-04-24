@@ -29,7 +29,13 @@ The 2015 Risk Score is a simple average of 5 risks scores from 5 independent mod
 2. Improve/Update Index and models
 3. Update Map!
 
-# Files
+## DataKind DataCorps
+
+DataKind DataCorps brings together teams of pro bono data scientists with social change organizations on long-term projects that use data science to transform their work and their sector. We help organizations define their needs and discover what’s possible, then match them with a team that can translate those needs into data science problems and solve them with advanced analytics. In some cases, organizations pay a modest management fee based on their budget to demonstrate their commitment to the project.
+
+We are very proud to re-partner with the American Red Cross!
+
+## Files
 
 RCP2 Google Drive: https://drive.google.com/drive/u/0/folders/1jq6iQiYgzQZM_vS_k2oiDlvyB5u-ywwW
 Phase 1's GitHub repo is <a href link="https://github.com/DataKind-DC/smoke_alarm_models">here</a>.

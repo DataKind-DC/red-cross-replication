@@ -13,7 +13,7 @@ gc()
 
 #' #### Getting setup
 # set directory for project
-setwd('/Users/judyyang/GitHub/red-cross-2')
+setwd('set red-cross-2 path here')
 
 # install libraries
 # install.packages('data.table') - OK
