@@ -17,8 +17,6 @@ The final product was a Home Fire Risk <a href link="http://www.datakind.org/blo
 
 The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 results. Phase 1's original GitHub repo is <a href link="https://github.com/DataKind-DC/smoke_alarm_models">here</a>. There are six models that the team is working to replicate, if you are interested in helping out on one, the Data Corps contact person is below.
 
-The 2015 Risk Score is a simple average of 5 risks scores from 5 independent models. Full notes are here. Six models were developed using various data sources and available at various geographic levels of aggregation.
-
 
 | Phase 1 Model | Target Variable  |  Predictors  | Type of Model  |  Data Sources |
 |-------|---|---|---|---|
