@@ -5,7 +5,13 @@
 
 #### **Model Data Sources**
 
-Model 1b uses the American Community Survey and NFIRS data. The original team blended 2009-2013 NFIRS data and merged this with Enigma's ACS-AHS blended database.
+Model 1b uses the American Community Survey and NFIRS data. The original team blended 2009-2013 NFIRS data (code available in Model-1B/phase1-code/nfirs_data_blending.py) and merged this with Enigma's ACS-AHS blended database.
+
+#### **Language and Packages Used**
+
+**Python:** pandas, numpy, scipy, sklearn (linearl_model, cross_validation (now called mode_selection), pre_proecessing, metrics) math
+
+**R:** (for NFIRS data blending only)
 
 #### **Model Target Variable**
 
