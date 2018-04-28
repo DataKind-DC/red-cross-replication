@@ -1,6 +1,17 @@
+
+## Model 2A README Description ##
+
+### Overview of Model ###
 In Model 2A, the goal is to calculate the number of fire incidents per 1000 people.  
 The **input** are the data sets described below, and the **output** is a map which indicates the tracts with the highest number of incidents per 1000 people.
 
+### Navigation ###
+
+- In phase1-code-model2a, you will find the RMarkdown file (phase1-code-model2a.Rmd) which contains the code written by the originals.  The code uploads the data required, extracts information from both census and National Fire Incident Reporting System (NFIRS) data, and then calculates the proportion of fire incidents per 1000 people.
+- In phase1-results-model2a, you will find data files created by phase1-code-model2A.Rmd which contain all the tract information for the proportion.  Additionally, maps of Maryland for years 2009-2013 are saved in phase1-visualization-model2a.
+- In phase2-code, you will find the work currently in progress by the Phase 2 Team.
+
+### Data ###
 Data required to successfully run Model 2A:
 
 - **_formatted_addresses.csv*: files that contain the formatted addresses of buildings for each year
@@ -13,6 +24,4 @@ Data required to successfully run Model 2A:
 
 The data files are too large for this repo, so they are stored on the Google Drive: ??
 
-Folders and files from Phase 1 are labeled as phase1-* so that others may view the work the Originals completed.  
-Folders and files from Phase 2 are labeled as phase2-* so that others may view the work in progress by the Phase 2 team.
 
