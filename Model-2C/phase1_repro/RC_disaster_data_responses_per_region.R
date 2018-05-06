@@ -1,15 +1,27 @@
+
+# Clear workspace
+rm(list=ls())
+
+# Load packages
 library(readr)
 library(plyr)
 library(dplyr)
 library(ggplot2)
 library(stringr)
 
-rc_disaster_data = read_csv("/users/nickbecker/downloads/2009-2014_RedCross_DisasterCases.csv")
-str(rc_disaster_data)
-glimpse(rc_disaster_data)
+# Navigate to directory containing R-scripts, store directories in variables
+code_folder <- getwd()
+ROOT_dir <- dirname(code_folder)
+data_folder <- paste(ROOT_dir,'/data', sep = '')
+output_folder <- paste(ROOT_dir,'/phase1_output', sep = '')
 
-#load("/Users/nickbecker/Documents/Github/Superseded/arc_smoke_alarm_old_2/data_from_david/2015-09-16.Rdata") 
-#all.equal(rc_disaster_data$case_num, RC_response$case_num)
+# Set working directory
+setwd(code_folder)
+
+# Load in data as dataframe
+rc_disaster_data <- read.csv(paste(data_folder,"/2009-2014_RedCross_DisasterCases_sample.csv",sep=''))
+
+
 
 
 rc_disaster_data %>% group_by(case_num) %>%
