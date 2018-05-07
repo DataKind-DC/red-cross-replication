@@ -1,82 +1,158 @@
+#############################################################################
+# RC_homefire_per_tract_risk_indicator.R
+#     Phase 2 Code Reproduction, 2018
+#     This file uses an API to find the census tract & block for each lat-long
+#     coordinate in the data set. The geo data are saved to CSV files in
+#     in chunks.
+#############################################################################
 
+# Clear workspace
+rm(list = ls())
 
-# Author: Margaret Furr
-# Date: 1/31/2016
-# Purpose: Getting tracts for coordinate pairs to prepare for calculating a risk indicator
-
-# libraries
+# Load packages
+library('xml2')
 library('XML')
 library('httr')
 library('base')
 library('rjson')
-library('base')
 library('foreach')
 library('doMC')
 library('data.table')
 library('plyr')
 
-outdata_dir <- '/Users/margaret/Desktop/Coordinates' # where will the data be outputted.  Not dumping directly to Google Drive bc it messes up with the syncing
 
-# read data from 2009-2014_RedCross_DisasterCases_sample.csv
-redcross_disaster_cases <- read.csv("2009-2014_RedCross_DisasterCases.csv",header=TRUE,na=NA)
-nrow(redcross_disaster_cases)
 
-# home fire cases
+# Navigate to directory containing R-scripts, store directories in variables
+code_folder <- getwd()
+ROOT_dir <- dirname(code_folder)
+data_folder <- paste(ROOT_dir,'/data', sep = '')
+output_folder <- paste(ROOT_dir,'/phase1_output/geocodes', sep = '')
+
+# Set working directory
+setwd(code_folder)
+
+
+
+# Load in data as dataframe
+# Can also run with a subset: 2009-2014_RedCross_DisasterCases_sample.csv
+redcross_disaster_cases <- read.csv(paste(data_folder,"/2009-2014_RedCross_DisasterCases.csv",sep=''), stringsAsFactors = FALSE)
+
+# Convert columns in old output summary stats to numeric.
+# Strings are converted to NA automatically.
+columnNames <- c("incident_disaster_fiscal_year","chapter_code","pre_zip_5_digit","num_clients","num_cases_w_fin_assist",           
+                 "age_5_or_under_num","age_62_to_69_num","age_6_to_61_num","age_over_69_num","female_num","male_num",
+                 "gender_undeclared_num","afro_american_num","native_american_num","asian_num","caucasian_num","hispanic_num",
+                 "ethnicity_undeclared_num","esri_longitude_x","esri_latitude_x","esri_zip") 
+for(i in 1:length(columnNames)){
+  redcross_disaster_cases[columnNames[i]] <- as.numeric(unlist(redcross_disaster_cases[columnNames[i]]))
+}
+
+print(paste("Total number of rows:",nrow(redcross_disaster_cases)))
+
+# Find home fire cases, store in variable
 redcross_homefire_cases <- redcross_disaster_cases[redcross_disaster_cases$event_type_old_categories == "Fire : Multi-Family" | redcross_disaster_cases$event_type_old_categories == "Fire : Single Family" | redcross_disaster_cases$event_type_old_categories == "Fire",]
 
 # lat/lon coordinates = esri_latitude_x and esri_longitude_x 
 redcross_homefire_cases$esri_latitude_x[1:5]
 redcross_homefire_cases$esri_longitude_x[1:5]
 
-# census tract
-redcross_homefire_cases$census_tract <- c()
-# urls
-urls <- c()
+# Save homefires dataframe to csv for manual examination
+write.csv(redcross_homefire_cases,
+          file = paste(data_folder,'/redcross_homefires_cases.csv',sep = ''),
+          row.names = FALSE,
+          na = "")
 
-coord_to_censusblock <- function(lat, long, id=NULL, out='geocodes.csv', overwrite=T, progress=T){
-  pbmax <- min(20,length(id))
-  pb <- txtProgressBar(min=min(id), max=max(id), initial=0, char="=", style=3)
+
+# Function to convert lat-long coordinates to census block using API
+coord_to_censusblock <- function(lat, long, id_ = NULL, out = 'geocodes.csv', overwrite = T, progress = T){
+  # Set up progress bar
+  pb <- txtProgressBar(min=min(id_), max=max(id_), initial=0, char="=", style=3)
   
-  for(i in id){
-    if(is.na(redcross_homefire_cases$esri_latitude_x[i])!=TRUE&&is.na(redcross_homefire_cases$esri_longitude_x[i])!=TRUE) {
-      url <- paste0("http://www.broadbandmap.gov/broadbandmap/census/tract?latitude=", 
-                    redcross_homefire_cases$esri_latitude_x[i],
-                    "&longitude=",
-                    redcross_homefire_cases$esri_longitude_x[i],
-                    "&format=xml"
-                    )
-      doc <-  xmlTreeParse(url)
-      tract <- xmlSApply(xmlRoot(doc)[[1]][[1]], xmlValue)['fips']
-      #tryget <- try({block <- as.character(doc[[1]]$children$Response['Block']$Block)[2]}) # messy way to scrape off census block
-      #if(class(tryget)=='try-error') block <- 'error'
-      ret <- data.frame(i, lat[i], long[i], tract)
-      if(i %% 10 == 0) cat(paste0(i, " records completely matched \n"))
-      write.table(ret, file = out, sep = ",",  col.names=FALSE, row.names=FALSE, append=TRUE)
-      # if(i %in% seq(min(id), max(id), by=round((abs(max(id)-min(id))/pbmax)))) setTxtProgressBar(pb, i)
+  for(i in unlist(id_)){
+    #print(paste("num:",i))
+    if(is.na(lat[i])!=TRUE&&is.na(long[i])!=TRUE) {
+      # Build URL for API
+      url <- paste0("http://www.broadbandmap.gov/broadbandmap/census/tract?latitude=",
+                    lat[i],"&longitude=",long[i],"&format=xml")
+      
+      # Create XML node
+      x <- read_xml(url)
+      
+      # Parse XML
+      doc <- xmlTreeParse(x)
+      
+      # Extract geo data
+      if(length(xml_find_all(x,".//message")) == 1){
+        # no census, node contains <message>No Census Tract results found</message>
+        # make geo variables NA if reverse geocoding fails
+        tract     <- "NA"
+        geoType   <- "NA"
+        stateFips <- "NA"
+        name      <- "NA"
+      } else{
+        tract     <- xmlSApply(xmlRoot(doc)[[1]][[1]], xmlValue)['fips']
+        geoType   <- xmlSApply(xmlRoot(doc)[[1]][[1]], xmlValue)['geographyType']
+        stateFips <- xmlSApply(xmlRoot(doc)[[1]][[1]], xmlValue)['stateFips']
+        name      <- xmlSApply(xmlRoot(doc)[[1]][[1]], xmlValue)['name']
+      }
+      
+      # Create dataframe with geo data
+      ret <- data.frame(i, lat[i], long[i], tract, geoType, stateFips, name)
+      
+      # Write add ret to CSV
+      write.table(ret, file = out, sep = ",",  col.names = FALSE, row.names = FALSE, append = TRUE)
+      
+      # Update progress bar
       setTxtProgressBar(pb, i)
     }
   }
 }
 
-registerDoMC(cores=10) # i have 4 cores on my macbook... but increasing beyond 4 seems to work
-ids <- split(1:nrow(redcross_homefire_cases), cut(1:nrow(redcross_homefire_cases), 7000, labels=FALSE)) # real deal
-#ids <- split(1:120, cut(1:120, 20, labels=FALSE)) # testing
+# Set up for parallel processing
+numCores <- detectCores()
+registerDoMC(cores = numCores)
+
+# Grouping indexes of dataframe rows into chunks for block processing, n = 100 chunks
+ids <- split(1:nrow(redcross_homefire_cases), cut(1:nrow(redcross_homefire_cases), 100, labels=FALSE))
+
+# Find the census block for each lat-long pairing for all rows in each chunk
+# Process bar only displays if you run each chunk individually (e.g. foreach(i = idx[90]))
+# Stops at id[90], geocodes_413105_417745.csv, remaining rows are NA
 system.time(
-  foreach(i=ids) %dopar%
-    coord_to_censusblock(redcross_homefire_cases$esri_latitude_x, redcross_homefire_cases$esri_longitude_x, id=i, out=sprintf('%s/geocodes_%s_%s.csv', outdata_dir, min(i), max(i)))
+  foreach(i = ids) %dopar%
+    coord_to_censusblock(redcross_homefire_cases$esri_latitude_x,
+                         redcross_homefire_cases$esri_longitude_x,
+                         id = i,
+                         out = sprintf('%s/geocodes_%s_%s.csv', output_folder, min(i), max(i)))
 )
 
 
+
 # get list of .csvs geocoded above w foreach
-filenames <- paste(outdata_dir, list.files(outdata_dir, pattern='.csv'), sep='/')
+filenames <- paste(output_folder, list.files(output_folder, pattern='.csv'), sep='/')
 
-# Read and append geocoded results
-homefire_geo <- do.call("rbind", lapply(filenames, fread, header = F))
-names(homefire_geo) <- c('id', 'Latitude', 'Longitude', 'tract')
+# Combine all CSV files into one dataframe
+counter = 1
+for(file_ in filenames){
+  if(counter == 1){
+    combined_geocodes <- read.csv(file_, stringsAsFactors = FALSE, header = FALSE)
+  } else{
+    temp_df <- read.csv(file_, header = FALSE, stringsAsFactors = FALSE)
+    combined_geocodes <- rbind(combined_geocodes, temp_df)
+    rm(temp_df)
+  }
+  counter = counter + 1
+}
 
-write.csv(homefire_geo, "2009-2014_Homefire_geo.csv")
+# Change column names
+names(combined_geocodes) <- c('id', 'Latitude', 'Longitude', 'tract','geoType','stateFips','name')
 
-homefire_geo <- read.csv("2009-2014_Homefire_geo.csv")
-nrow(redcross_homefire_cases) - nrow(homefire_geo) # 59336 missing
+# Write dataframe to CSV
+write.csv(combined_geocodes,
+          paste(ROOT_dir,'/phase1_output/2009-2014_Homefire_geo.csv',sep=''),
+          row.names = FALSE)
+
+homefire_geo <- read.csv(paste(ROOT_dir,'/phase1_output/2009-2014_Homefire_geo.csv',sep=''))
+nrow(redcross_homefire_cases) - nrow(homefire_geo) # old: 59336 missing, new: 49503 missing
 fires_per_tract <- count(homefire_geo$tract)
-write.csv(fires_per_tract, "fires_per_tract.csv")
+write.csv(fires_per_tract, paste(ROOT_dir,'/phase1_output/fires_per_tract.csv',sep=''))
