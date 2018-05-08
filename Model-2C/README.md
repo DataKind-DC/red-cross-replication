@@ -11,16 +11,17 @@ The files in this folder:
 
 ## Data
 Below is a list of data sets used by and created by the code.
+
 | Dataset | Created/ Used? | Code Created | Description |
 | ------- | -------------- | ------------ | ----------- |
-| 2009-2014_RedCross_DisasterCases.csv | Used | NA | main data set containing Red Cross data & lat-long |
-| 2009-2014_Homefire_geo.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | reverse geocode from lat-long, used by redcross_homefire_risk_indicator.R |
-| rc_disaster_summary_stats.txt | Created | RC_disaster_data_exploring.R  | summary statistics for 2009-2014_RedCross_DisasterCases.csv dataset |
-| redcross_homefires_cases.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | previously named 2009-2014_RedCross_HomeFire_Cases.csv, subset of 2009-2014_RedCross_DisasterCases.csv that only contains home fire records, used by redcross_homefire_risk_indicator.R |
-| redcross_homefires_cases_tract.csv | Created & Used | redcross_homefire_risk_indicator.R | merged dataframe containing census tract information and Red Cross fire information |
-| homefire_risk_indicator1.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per day per tract |
-| homefire_risk_indicator3.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per tract |
-| fires_per_tract.csv | Created | RC_homefire_per_tract_risk_indicator.R | number of fires per tract |
+| 2009-2014_RedCross_DisasterCases.csv | Used | NA | main data set containing Red Cross data & lat-long
+| 2009-2014_Homefire_geo.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | reverse geocode from lat-long, used by redcross_homefire_risk_indicator.R
+| rc_disaster_summary_stats.txt | Created | RC_disaster_data_exploring.R  | summary statistics for 2009-2014_RedCross_DisasterCases.csv dataset
+| redcross_homefires_cases.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | previously named 2009-2014_RedCross_HomeFire_Cases.csv, subset of 2009-2014_RedCross_DisasterCases.csv that only contains home fire records, used by redcross_homefire_risk_indicator.R
+| redcross_homefires_cases_tract.csv | Created & Used | redcross_homefire_risk_indicator.R | merged dataframe containing census tract information and Red Cross fire information
+| homefire_risk_indicator1.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per day per tract
+| homefire_risk_indicator3.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per tract
+| fires_per_tract.csv | Created | RC_homefire_per_tract_risk_indicator.R | number of fires per tract
 
 ## Code
 | Code | Phase | Libraries/ Modules | Description | Notes |
@@ -44,5 +45,5 @@ Below is a list of data sets used by and created by the code.
 ## Progress
 | Meeting | Date | Volunteers | Notes |
 | ------- | ---- | ---------- | ----- |
-| 1 | ? | S. Sylvester, R. Handa | reviewed phase 1 code, discussed purpose of code to team, provided suggestions for phase 1
+| 1 | ? | S. Sylvester, R. Handa | reviewed phase 1 code, discussed purpose of code to team, provided suggestions for phase 1 |
 | 2 | May 8, 2018 | S. Sylvester | - |
