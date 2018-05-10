@@ -1,0 +1,13 @@
+# Phase 2 Output
+
+*2009_2014_RedCross_DisasterCases_with_census_data.csv*
+Produced by: get_geocodes.R
+Description: Contains all information from 2009_2014_RedCross_DisasterCases.csv with census tract information as additional columns. Columns where data were collected via Phase 1's API method have column names with the extension "_api". All other columns contain data from 2010 census tract shapefiles.
+
+*geocodes_xml_method.csv*
+Produced by: phase2_reverse_geocoding_xml_parsing.ipynb
+Description: Census tract information for each lat-long coordinate (not complete due to long runtime)
+
+*geocodes.csv*
+Produced by: phase2_reverse_geocoding.ipynb
+Description: Census tract information for each lat-long coordinate (not complete due to long runtime)

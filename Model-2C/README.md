@@ -1,4 +1,4 @@
-# Model 2C: Replication
+# Model 2C, Phase 2
 
 ## Description
 This folder contains scripts that were part of phase 1's Model 2C folder. Despite being named "Model 2C", there are no predicitive models in this folder past or present.
@@ -38,12 +38,13 @@ Below is a list of data sets used by and created by the code.
 ## To Do List
 | Item | Completed |
 | ---- | --------- |
-| Find a faster way to geocode or parallelize current code | - |
+| Find a faster way to geocode or parallelize current code | May 9 |
 | Finalize EDA | - |
-| Reverse geocode with intact dataset, skip rows that were removed previously to avoid indexing issues | - |
+| Reverse geocode with intact dataset, skip rows that were removed previously to avoid indexing issues | May 9 |
+| Try reverse geocoding using geopandas following similar approach as get_geocodes.R | - |
 
 ## Progress
 | Meeting | Date | Volunteers | Notes |
 | ------- | ---- | ---------- | ----- |
 | 1 | ? | S. Sylvester, R. Handa | reviewed phase 1 code, discussed purpose of code to team, provided suggestions for phase 1 |
-| 2 | May 8, 2018 | S. Sylvester | - |
+| 2 | May 8, 2018 | S. Sylvester, D. Duval-Diop , J. Wenk | addressed geocode issues |
