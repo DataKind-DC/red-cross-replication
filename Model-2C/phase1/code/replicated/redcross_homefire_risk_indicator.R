@@ -18,11 +18,10 @@ library('dplyr')
 library('ggplot2')
 library('gdata')
 
-# Navigate to directory containing R-scripts, store directories in variables
-code_folder <- getwd()
-ROOT_dir <- dirname(code_folder)
-data_folder <- paste(ROOT_dir,'/data', sep = '')
-output_folder <- paste(ROOT_dir,'/phase1_output/geocodes', sep = '')
+# Set directories
+data_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/data"
+output_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/output/replicated"
+code_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/code/replicated"
 
 # Set working directory
 setwd(code_folder)
@@ -31,13 +30,13 @@ setwd(code_folder)
 
 # Load home fires CSV that was created in RC_homefire_per_tract_risk_indicator.R
 # PReviously named 2009-2014_RedCross_HomeFire_Cases.csv
-redcross_homefire_cases <- read.csv(paste(data_folder,"/redcross_homefires_cases.csv",sep=''),
+redcross_homefire_cases <- read.csv(paste(output_folder,"redcross_homefires_cases.csv",sep='/'),
                                     stringsAsFactors = FALSE,
                                     header = TRUE,
                                     na = NA)
 
 # Load census data
-census_df <- read.csv(paste(ROOT_dir,"/phase1_output/2009-2014_Homefire_geo.csv",sep=''),
+census_df <- read.csv(paste(output_folder,"2009-2014_Homefire_geo.csv",sep = '/'),
                                     stringsAsFactors = FALSE,
                                     header = TRUE,
                                     na = NA)
@@ -48,11 +47,11 @@ if('tract' %in% colnames(redcross_homefire_cases)){
 } else{
       redcross_homefire_cases$tract <- NA
       for(i in 1:dim(census_df)[1]){
-        idx = census_df$id[i]
+        idx <- census_df$id[i]
         redcross_homefire_cases$tract[idx] <- census_df$tract[i]
       }
       write.csv(redcross_homefire_cases,
-                paste(ROOT_dir,'/phase1_output/redcross_homefires_cases_tract.csv',sep=''),
+                paste(output_folder,'redcross_homefires_cases_tract.csv',sep = '/'),
                 row.names = FALSE)
 }
 
@@ -93,5 +92,5 @@ aggregated_homefire_data3 <- rename.vars(aggregated_homefire_data3,"x","risk_ind
 names(aggregated_homefire_data3)
 
 # write to csv
-write.csv(aggregated_homefire_data, paste(ROOT_dir,"/phase1_output/homefire_risk_indicator1.csv",sep=''))
-write.csv(aggregated_homefire_data3, paste(ROOT_dir,"/phase1_output/homefire_risk_indicator3.csv",sep=''))
+write.csv(aggregated_homefire_data, paste(output_folder,"homefire_risk_indicator1.csv",sep='/'))
+write.csv(aggregated_homefire_data3, paste(output_folder,"homefire_risk_indicator3.csv",sep='/'))

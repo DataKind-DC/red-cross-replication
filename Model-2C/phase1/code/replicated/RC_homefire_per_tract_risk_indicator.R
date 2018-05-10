@@ -22,11 +22,10 @@ library('plyr')
 
 
 
-# Navigate to directory containing R-scripts, store directories in variables
-code_folder <- getwd()
-ROOT_dir <- dirname(code_folder)
-data_folder <- paste(ROOT_dir,'/data', sep = '')
-output_folder <- paste(ROOT_dir,'/phase1_output/geocodes', sep = '')
+# Set directories
+data_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/data"
+output_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/output/replicated"
+code_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/code/replicated"
 
 # Set working directory
 setwd(code_folder)
@@ -58,7 +57,7 @@ redcross_homefire_cases$esri_longitude_x[1:5]
 
 # Save homefires dataframe to csv for manual examination
 write.csv(redcross_homefire_cases,
-          file = paste(data_folder,'/redcross_homefires_cases.csv',sep = ''),
+          file = paste(output_folder,'/redcross_homefires_cases.csv',sep = ''),
           row.names = FALSE,
           na = "")
 
@@ -123,13 +122,15 @@ system.time(
     coord_to_censusblock(redcross_homefire_cases$esri_latitude_x,
                          redcross_homefire_cases$esri_longitude_x,
                          id = i,
-                         out = sprintf('%s/geocodes_%s_%s.csv', output_folder, min(i), max(i)))
+                         out = sprintf('%s/geocodes/geocodes_%s_%s.csv', output_folder, min(i), max(i)))
 )
 
 
 
 # get list of .csvs geocoded above w foreach
-filenames <- paste(output_folder, list.files(output_folder, pattern='.csv'), sep='/')
+filenames <- paste(output_folder,'geocodes',
+                   list.files(paste(output_folder,'geocodes',sep = '/'), pattern='.csv'),
+                   sep='/')
 
 # Combine all CSV files into one dataframe
 counter = 1
@@ -149,10 +150,10 @@ names(combined_geocodes) <- c('id', 'Latitude', 'Longitude', 'tract','geoType','
 
 # Write dataframe to CSV
 write.csv(combined_geocodes,
-          paste(ROOT_dir,'/phase1_output/2009-2014_Homefire_geo.csv',sep=''),
+          paste(output_folder,'2009-2014_Homefire_geo.csv',sep='/'),
           row.names = FALSE)
 
-homefire_geo <- read.csv(paste(ROOT_dir,'/phase1_output/2009-2014_Homefire_geo.csv',sep=''))
+homefire_geo <- read.csv(paste(output_folder,'2009-2014_Homefire_geo.csv',sep='/'))
 nrow(redcross_homefire_cases) - nrow(homefire_geo) # old: 59336 missing, new: 49503 missing
 fires_per_tract <- count(homefire_geo$tract)
-write.csv(fires_per_tract, paste(ROOT_dir,'/phase1_output/fires_per_tract.csv',sep=''))
+write.csv(fires_per_tract, paste(output_folder,'fires_per_tract.csv',sep='/'))

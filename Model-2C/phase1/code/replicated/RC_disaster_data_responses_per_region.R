@@ -18,23 +18,14 @@ library(dplyr)
 library(ggplot2)
 #library(stringr)
 
-# Navigate to directory containing R-scripts, store directories in variables
-code_folder <- getwd()
-ROOT_dir <- dirname(code_folder)
-data_folder <- paste(ROOT_dir,'/data', sep = '')
-output_folder <- paste(ROOT_dir,'/phase1_output', sep = '')
+# Set directories
+data_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/data"
+output_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/output/replicated"
+code_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/code/replicated"
 
 # Set working directory
 setwd(code_folder)
 
-# Navigate to directory containing R-scripts, store directories in variables
-code_folder <- getwd()
-ROOT_dir <- dirname(code_folder)
-data_folder <- paste(ROOT_dir,'/data', sep = '')
-output_folder <- paste(ROOT_dir,'/phase1_output', sep = '')
-
-# Set working directory
-setwd(code_folder)
 
 # Load in data as dataframe
 # Can also run with a subset: 2009-2014_RedCross_DisasterCases_sample.csv
