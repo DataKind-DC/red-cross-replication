@@ -11,8 +11,6 @@ library('UScensus2010')
 library('UScensus2010tract') 
 install.tract("osx") # need to run this if running for first time
 
-#setwd("C:/Users/mcboe72/Documents/GitHub/red-cross-2/Model-Aggregate/Inputs")
-
 #Load model outputs
 
 dt1a_prep1 <- getURL('https://raw.githubusercontent.com/DataKind-DC/red-cross-2/master/Model-Aggregate/Inputs/smoke-alarm-risk-scores_1a.csv') 
