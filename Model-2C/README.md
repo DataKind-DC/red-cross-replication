@@ -1,49 +1,57 @@
-# Model 2C: Replication
+# Phase 2 Replication of Phase 1 Model 2C
 
-## Description
-This folder contains scripts that were part of phase 1's Model 2C folder. Despite being named "Model 2C", there are no predicitive models in this folder past or present.
+### Description
+This folder contains scripts that were part of phase 1's Model 2C folder and updated versions of said scripts. Despite being named "Model 2C", there are no predicitive models in this folder past or present.
 
 The files in this folder:
-- provides basic exploratory analysis
+
+- provide basic exploratory data analysis
 - reverse geocodes census tract information from geographical (latitude & longitude) coordinates
-- create fire idicator that is equal to the total number of fires per census tract
-- plots number of cases for each Red Cross zone and state
+- create fire idicator score that is equal to the total number of fires per census tract
 
-## Data
-Below is a list of data sets used by and created by the code.
+### Code
+Replicated phase 1 code is written in R (version 3.4.4 (2018-03-15), Someone to Lean On) and Python 3.6. More detailed descriptions of code can be found in README.md files within each folder.
 
-| Dataset | Created/ Used? | Code Created | Description |
-| ------- | -------------- | ------------ | ----------- |
-| 2009-2014_RedCross_DisasterCases.csv | Used | NA | main data set containing Red Cross data & lat-long
-| 2009-2014_Homefire_geo.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | reverse geocode from lat-long, used by redcross_homefire_risk_indicator.R
-| rc_disaster_summary_stats.txt | Created | RC_disaster_data_exploring.R  | summary statistics for 2009-2014_RedCross_DisasterCases.csv dataset
-| redcross_homefires_cases.csv | Created & Used | RC_homefire_per_tract_risk_indicator.R | previously named 2009-2014_RedCross_HomeFire_Cases.csv, subset of 2009-2014_RedCross_DisasterCases.csv that only contains home fire records, used by redcross_homefire_risk_indicator.R
-| redcross_homefires_cases_tract.csv | Created & Used | redcross_homefire_risk_indicator.R | merged dataframe containing census tract information and Red Cross fire information
-| homefire_risk_indicator1.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per day per tract
-| homefire_risk_indicator3.csv | Created | redcross_homefire_risk_indicator.R | fire risk indicator equal to the number of fires per tract
-| fires_per_tract.csv | Created | RC_homefire_per_tract_risk_indicator.R | number of fires per tract
+### Data
+Input and output data can be downloaded from the Phase 2 Google Drive. See project leads for access.
 
-## Code
-| Code | Phase | Libraries/ Modules | Description | Notes |
-| ---- | ----- | ------------------ | ----------- | ----- |
-| RC_disaster_data_exploring.R | 1 & 2 | readr, plyr, dplyr, ggplot2, stargazer | EDA | need a different way of summarizing data since there are different data types within each column
-| RC_disaster_data_responses_per_region.R | 1 & 2 | readr, plyr, dplyr, ggplot2 | generates figures | try and repeat for each type of RC case
-| RC_homefire_per_tract_risk_indicator.R | 1 & 2 | xml2, XML, httr, base, rjson, foreach, doMC, data.table, plyr | reverse geocode | takes about 4 hours so currently is the fastest method, change code so that fire events are not subsetted into a seperate dataframe since there are concerns that indexing across different data sets will make merging difficult
-| redcross_homefire_risk_indicator.R | 1 & 2 | readr, plyr, dplyr, ggplot2, gdata | generates fire risk indicator | NA
-| phase2_model2c_EDA.ipynb | 2 | os, pandas, numpy, seaborn, matplotlib | replication of phase 1 EDA | more granular EDA, tons of figures to digest
-| phase2_reverse_geocoding.ipynb | 2 | os, pandas, numpy, censusgeocode, math, datetime, tqdm | replication of phase 1 reverse geocoding using censusgeocode module | slowest approach, try to parallelize
-| phase2_reverse_geocoding_xml_parsing.ipynb | 2 | os, pandas, numpy, math, time, tqdm, xml, urllib, xmltodict | replication of phase 1 reverse geocoding using phase 1 API | very slow, but faster than the censusgeocode approach, try to parallelize, try to save and append census data in chunks
+#### Input
+
+- state_FIPs_codes.txt
+- 2009-2014_RedCross_DisasterCases.csv
+- 2010 census tract shapefiles
+
+#### Output
+
+**Phase 1 (Original & Replicated)**
+
+- 2009-2014_Homefire_geo.csv
+- rc_disaster_summary_stats.txt
+- redcross_homefires_cases.csv
+- redcross_homefires_cases_tract.csv
+- homefire_risk_indicator1.csv
+- homefire_risk_indicator3.csv
+- fires_per_tract.csv
+- geocodes_x_x.csv
+
+**Phase 2**
+
+- 2009_2014_RedCross_DisasterCases_with_census_data.csv
+- geocodes_xml_method.csv
+- geocodes.csv
 
 
-## To Do List
+
+### To Do List
 | Item | Completed |
-| ---- | --------- |
-| Find a faster way to geocode or parallelize current code | - |
+| --------------------------------------------------- | --------- |
+| Find a faster way to geocode or parallelize current code | May 9 |
 | Finalize EDA | - |
-| Reverse geocode with intact dataset, skip rows that were removed previously to avoid indexing issues | - |
+| Reverse geocode with intact dataset, skip rows that were removed previously to avoid indexing issues | May 9 |
+| Try reverse geocoding using geopandas following similar approach as get_geocodes.R | - |
 
-## Progress
+### Progress
 | Meeting | Date | Volunteers | Notes |
-| ------- | ---- | ---------- | ----- |
+| --- | --------- | ---------- | ------------------------------------ |
 | 1 | ? | S. Sylvester, R. Handa | reviewed phase 1 code, discussed purpose of code to team, provided suggestions for phase 1 |
-| 2 | May 8, 2018 | S. Sylvester | - |
+| 2 | May 8, 2018 | S. Sylvester, D. Duval-Diop , J. Wenk | addressed geocode issues |
