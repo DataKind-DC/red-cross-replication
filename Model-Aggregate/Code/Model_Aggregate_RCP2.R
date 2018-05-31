@@ -11,6 +11,8 @@ library('UScensus2010')
 library('UScensus2010tract') 
 #install.tract("osx") # need to run this if running for first time
 
+getwd()
+
 #Load model outputs
 
 dt1a_prep1 <- getURL('https://raw.githubusercontent.com/DataKind-DC/red-cross-2/master/Model-Aggregate/Inputs/smoke-alarm-risk-scores_1a.csv') 
@@ -225,6 +227,6 @@ dt <- merge(dt, reg[,.(county_fips, chap_code, chap_short_name, county_name)], b
 
 dt[, risk1_agg := (risk_1a + risk_1b + risk_1c)/3]
 dt[, risk2_agg := (risk_2a + risk_2c)/2]
-dt[, risk3_agg := risk3_a]
+dt[, risk3_agg := risk_3a]
 
-write.table(dt[,.(state, cnty, tract, tract_geoid, region_code, region_name, chapter_code, chapter_name, county_name_long, risk_cnty, risk, risk_1a, risk_1b, risk_1c, risk_2a, risk_2c, risk_3a, risk_1agg, risk2_agg, risk_3agg)], file='aggregate_risk/data/risk_tract.csv', sep=',', row.names=F)
+write.table(dt[,.(state, cnty, tract, tract_geoid, risk_cnty, risk, risk_1a, risk_1b, risk_1c, risk_2a, risk_2c, risk_3a, risk1_agg, risk2_agg, risk3_agg)], file='risk_tract.csv', sep=',', row.names=F)
