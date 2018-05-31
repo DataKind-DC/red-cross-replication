@@ -9,7 +9,7 @@ library('readxl')
 library(RCurl)
 library('UScensus2010')
 library('UScensus2010tract') 
-install.tract("osx") # need to run this if running for first time
+#install.tract("osx") # need to run this if running for first time
 
 #Load model outputs
 
@@ -199,23 +199,25 @@ dt[, risk_cnty:=mean(risk), by=.(state, cnty)]
 ###################################################################################################
 
 
-#This URL does not work
-
 # reading in crosswalk ARC region <=> FIPS data
-fileurl <- 'http://maps.redcross.org/website/Services/Data/2015_Chapter_Alignment_Master_No_Contacts.xlsx'
-download.file(fileurl, '2015_Chapter_Alignment_Master_No_Contacts.xlsx')
-reg <- data.table(read_excel('2015_Chapter_Alignment_Master_No_Contacts.xlsx', sheet = 'COUNTY_CHAP_NO_CONTACTS', skip = 1))
+
+reg_prep1 <- getURL('https://raw.githubusercontent.com/DataKind-DC/red-cross-2/master/Model-Aggregate/Inputs/Zip%20to%20ARC%20Geographies%20(as%20of%207.1.2018).csv') 
+reg_prep2 <-read.csv(text=reg_prep1)
+reg <- as.data.table(reg_prep2)
 setnames(reg, names(reg), tolower(gsub(' ', '_', names(reg))))
+setnames(reg, old="fips", new="county_fips")
+reg <- reg[, county_fips:=as.character(county_fips)]
 
 # deduping
-reg <- reg[,head(.SD, 1), by='county_fips']
+reg <- reg[,head(.SD, 1), by='fips']
+
+
+
 
 # cross-walking
 dt[, county_fips:=substr(tract_geoid, 0, 5)]
-dt <- merge(dt, reg[,.(county_fips, region_code, region_name, chapter_code, chapter_name, county_name_long)], by='county_fips', all.x=T, all.y=F)
+dt <- merge(dt, reg[,.(county_fips, chap_code, chap_short_name, county_name)], by='county_fips', all.x=T, all.y=F)
 
-# cleaing up
-file.remove('2015_Chapter_Alignment_Master_No_Contacts.xlsx') # remove file after merge, no need to keep clutter
 
 #######################################
 ## WRITING OUT RESULTS ################
