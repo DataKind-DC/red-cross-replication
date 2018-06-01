@@ -7,6 +7,12 @@ In 2015, DataKind DC, the American Red Cross, and Enigma worked together to crea
 
 The final product was a Home Fire Risk <a href link="http://www.datakind.org/blog/american-red-cross-and-datakind-team-up-to-prevent-home-fire-deaths-and-injuries">Map</a>.
 
+Google Drive link:
+
+https://drive.google.com/drive/folders/1jq6iQiYgzQZM_vS_k2oiDlvyB5u-ywwW?usp=sharing
+
+
+
 ## Phase 2 Road Map
 1. Replicate Phase 1 Models
 2. Cross Validation of Phase 1 Predictions with New data
@@ -31,8 +37,6 @@ The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 re
 
 ## DataKind DataCorps
 
-DataKind DataCorps brings together teams of pro bono data scientists with social change organizations on long-term projects that use data science to transform their work and their sector. We help organizations define their needs and discover what’s possible, then match them with a team that can translate those needs into data science problems and solve them with advanced analytics. 
+DataKind DataCorps brings together teams of pro bono data scientists with social change organizations on long-term projects that use data science to transform their work and their sector. We help organizations define their needs and discover what’s possible, then match them with a team that can translate those needs into data science problems and solve them with advanced analytics.
 
 We are very proud to re-partner with the American Red Cross!
-
-
