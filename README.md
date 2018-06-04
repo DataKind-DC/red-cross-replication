@@ -24,14 +24,14 @@ https://drive.google.com/drive/folders/1jq6iQiYgzQZM_vS_k2oiDlvyB5u-ywwW?usp=sha
 The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 results. Phase 1's original GitHub repo is <a href="https://github.com/DataKind-DC/smoke_alarm_models">here</a>. There are six models that the team is working to replicate, if you are interested in helping out on one, the Data Corps contact person is below.
 
 
-| Phase 1 Model | Target Variable  |  Status  | Issues  |  Data Sources |
-|-------|---|---|---|---|
-|   1A  - Judy   |   | verifying replication (JY)  |   |   |
-|   1B - Maria  |   | verifying replication   |   |   |
-|   1C - Roland |   | verifying replication   |   |   |
-|   2A - Amanda   |   | verifying replication   |   |   |
-|   2C - Sherika    |   |  under replication |  Missing input data |   |
-|   3A - Manuel  |   |  under replication | Issue with geo-coding   |   | 
+| Phase 1 Model  |  Status  | Issues  |  Data Sources |
+|-------|---|---|---|
+|   1A  - Judy    | verifying replication (JY)  |   |   |
+|   1B - Maria    | verifying replication   |   |   |
+|   1C - Roland   | verifying replication   |   |   |
+|   2A - Amanda   | verifying replication   |   |   |
+|   2C - Sherika  |  under replication |  Missing input data |   |
+|   3A - Manuel   |  under replication | Issue with geo-coding   |   | 
 
 
 
