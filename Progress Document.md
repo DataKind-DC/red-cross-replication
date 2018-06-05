@@ -12,6 +12,14 @@ Model 2C- Sherika and Daniel worked on it, issue with replicating jittering
 
 Model 3A- Did not attempt work here, Sherika asked Jake about input data
 
+Next steps: 
+
+1. Get updated data for Models 1A, 2A and maybe 1B
+
+2. Continue replication of Models 1C, 2C, 3A
+
+
+
 **Meeting Notes 5/31
 Discussed
 <br>
