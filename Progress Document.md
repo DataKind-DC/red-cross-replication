@@ -1,4 +1,17 @@
-Meeting Notes 5/31
+** June 4, 2018 Data Jam
+
+Model 1A- Judy verifying
+
+Model 1B - Vicki checked replication, not match
+
+Model 1C - Minh and others could not figure out how final csv file was created, no R script?
+
+Model 2A-
+
+Model 2C- Sherika and Daniel worked on it, issue with replicating jittering
+
+
+**Meeting Notes 5/31
 Discussed
 <br>
 
