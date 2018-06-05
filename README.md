@@ -23,6 +23,8 @@ https://drive.google.com/drive/folders/1jq6iQiYgzQZM_vS_k2oiDlvyB5u-ywwW?usp=sha
 
 The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 results. Phase 1's original GitHub repo is <a href="https://github.com/DataKind-DC/smoke_alarm_models">here</a>. There are six models that the team is working to replicate, if you are interested in helping out on one, the Data Corps contact person is below.
 
+Progress Notes:  <a href link="https://github.com/DataKind-DC/red-cross-2/blob/master/Progress%20Document.md">here</a>
+
 
 | Phase 1 Model  |  Status  | Next Steps | Issues  |  Data Sources |
 |-------|---|---|---|---|
