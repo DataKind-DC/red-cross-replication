@@ -1,15 +1,16 @@
 ** June 4, 2018 Data Jam
 
-Model 1A- Judy verifying
+Model 1A- Judy verified that the replication matches Phase 1
 
-Model 1B - Vicki checked replication, not match
+Model 1B - Vicki checked replication, not match (?). 
 
-Model 1C - Minh and others could not figure out how final csv file was created, no R script?
+Model 1C - Minh and others could not figure out how final csv file was created, no R script? Minh then found the code from Enigma and has made progress on how to replicate the smoke-alarm-risk-scores.csv file that is used in the aggregate model.
 
-Model 2A-
+Model 2A- Lauren verfied that the replication matches Phase 1
 
 Model 2C- Sherika and Daniel worked on it, issue with replicating jittering
 
+Model 3A- Did not attempt work here, Sherika asked Jake about input data
 
 **Meeting Notes 5/31
 Discussed
