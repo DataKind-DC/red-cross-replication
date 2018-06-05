@@ -7,10 +7,6 @@ In 2015, DataKind DC, the American Red Cross, and Enigma worked together to crea
 
 The final product was a Home Fire Risk <a href="http://www.datakind.org/blog/american-red-cross-and-datakind-team-up-to-prevent-home-fire-deaths-and-injuries">Map</a>.
 
-Google Drive link:
-
-https://drive.google.com/drive/folders/1jq6iQiYgzQZM_vS_k2oiDlvyB5u-ywwW?usp=sharing
-
 
 
 ## Phase 2 Road Map
