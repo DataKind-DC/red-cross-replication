@@ -28,7 +28,7 @@ The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 re
 |-------|---|---|---|
 |   1A  - Judy    | verifying replication (JY)  |   |   |
 |   1B - Maria    | verifying replication   |   |   |
-|   1C - Roland   | verifying replication   |   |   |
+|   1C - Roland   | Verified by Minh Mai (June 4, 2018)   |   |   |
 |   2A - Amanda   | verifying replication   |   |   |
 |   2C - Sherika  |  under replication |  Missing input data |   |
 |   3A - Manuel   |  under replication | Issue with geo-coding   |   | 
