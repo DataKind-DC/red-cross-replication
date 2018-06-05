@@ -8,7 +8,7 @@ Model 1C - Minh and others could not figure out how final csv file was created, 
 
 Model 2A- Lauren verfied that the replication matches Phase 1
 
-Model 2C- Sherika and Daniel worked on it, issue with replicating jittering
+Model 2C- Sherika and Daniel worked on it, issue with replicating jittering & comparing output data
 
 Model 3A- Did not attempt work here, Sherika asked Jake about input data
 
@@ -40,14 +40,12 @@ d.	Not convinced the output data available on GitHub are the correct/data used i
 
 2)	3A is not replicable. The code relies on data files that no longer exist, but we have contacted the original creator to see if we can get the dat.
 
-3)	2C is not fully replicable because of the jittering of lat lons used to protect privacy. We do not have code that indicates the random seed used to jitter.
+3)	2C is not fully replicable because of the jittering of lat lons used to protect privacy. We do not have code that indicates the random seed used to jitter. 11.5% of census tracts from the original (phase 1) output have different frequencies in phase 1 replicated output. Phase 1 replicated output files are too large for Github, so they are in the Google Drive.
 
 Tasks to get done:
 1)	Put original output files into the aggregate model code. Check differences between original output file and the results from this output (Roland)
 
-2)	2C outputs (put on Github/Google Drive)
-
-3)	3A outputs – if possible. Talk with Nick (Original author)
+2)	3A outputs – if possible. Talk with Nick (Original author)
 
 
 Meeting Notes 6/4 (Data Jam)
