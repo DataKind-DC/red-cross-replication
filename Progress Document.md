@@ -4,7 +4,7 @@ Model 1A- Judy verified that the replication matches Phase 1.
 
 Model 1B - Vicki checked replication, match
 
-Model 1C - Minh and others could not figure out how final csv file was created, no R script? Minh then found the code from Enigma and has made progress on how to replicate the smoke-alarm-risk-scores.csv file that is used in the aggregate model. He will confirm this is the case with Roland.
+Model 1C - Minh and others could not figure out how final csv file was created, no R script? Minh then found the code from Enigma and has made progress on how to replicate the smoke-alarm-risk-scores.csv file that is used in the aggregate model. He will confirm if this is the case with Roland.
 
 Model 2A- Lauren verfied that the replication matches Phase 1. 
 
