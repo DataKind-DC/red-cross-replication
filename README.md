@@ -24,10 +24,10 @@ Progress Notes:  <a href="https://github.com/DataKind-DC/red-cross-2/blob/master
 
 | Phase 1 Model  |  Status  | Next Steps | Issues  |  Data Sources |
 |-------|---|---|---|---|
-|   1A  - Judy    | Verified by Judy (June 4, 2018) | Update with new ACS & RC Home Fire Install data  |   |   |
-|   1B - Maria    | verifying replication   | |  |   |
+|   1A  - Judy    | Verified by Judy (June 4, 2018) | Update model with new ACS & RC Home Fire Install data  |   |   |
+|   1B - Maria    | Verified  | Update model with new data  |  |   |
 |   1C - Roland   |under replication (last update by Minh June 4, 2018) |  | Cannot find R script that creates results (Minh found code by Enigma) |   |
-|   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update with new data   | |  |
+|   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | |  |
 |   2C - Sherika  |  under replication (last update June 4, 2018: Sherika and Daniel) |   |  Issue with geo-coding| |
 |   3A - Manuel   |  under replication | | Missing input data: acs_tract_data.csv  |   | 
 
