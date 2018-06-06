@@ -17,6 +17,7 @@ library(bit64)
 rm(list=ls()) 
 gc()
 
+#data is zipped here: https://drive.google.com/file/d/17_xzxhxzHAKCPR4q9cWFUAkja16X4mTY/view
 
 downloads_path =  '/Users/judyyang/GitHub/red-cross-2/Model-3a/data/'
 save_path =       '/Users/judyyang/GitHub/red-cross-2/Model-3a/phase2-results/'
