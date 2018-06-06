@@ -29,7 +29,7 @@ Progress Notes:  <a href="https://github.com/DataKind-DC/red-cross-2/blob/master
 |   1C - Roland   |under replication (last update by Minh June 4, 2018) |  | Cannot find R script that creates results (Minh found code by Enigma) |   |
 |   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | |  |
 |   2C - Sherika  |  under replication (last update June 4, 2018: Sherika and Daniel) |   |  Issue with geo-coding| |
-|   3A - Manuel   |  under replication | | Missing input data: acs_tract_data.csv  |   | 
+|   3A - Manuel   |  under replication | | Missing input data: data/rdata/tract_data.Rdata   |   | 
 
 
 
