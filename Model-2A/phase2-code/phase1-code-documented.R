@@ -26,45 +26,65 @@ structure_fire_per_1k = function(data_year){
   # this line of code gives how many of each address type
   # note, 2010 does not have address type
   table(address$address_type)
+  
+  # 2010 issue: https://drive.google.com/drive/folders/0BxhID98AlD4ZcEg4RmpKd2tPSVE
+  # is address type even needed?  not used below.
+  
   # load basic incident data -- basic incidents are any incidents the fire department is called for,
   # not necessarily resulting in fire
-  # data has 10 columns, variables including ALARM, ARRIVAL, INC_DATE
+  # data has variables like ALARM, ARRIVAL, INC_DATE
   basic_incident = fread("basic_incident.txt", sep = "^")
   # loads fire incident data -- calls that did have a fire
   # data has 20 variables, including incident data, incident year, street, zip code, and address
+  
   fire_incident = fread("fire_incident.txt", sep = "^")
   # determine a list of tracts that are contained in the data
   tracts_covered = unique(geocoded_address[, tractid])
   # save the results because it's needed for estimating NFIRS coverage.
   saveRDS(tracts_covered, file = paste0(data_year, '_tracts_covered.rds'))
+  
   # determines which fire incidents were building fires based on the NFIRS code 111
   setkey(fire_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
-  building_fire = fire_incident[basic_incident[grep('111',INC_TYPE)]]
-  # orders the address data by these variables
   setkey(basic_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
+  # the originals had fire_incident[basic_incident[grep('111',INC_TYPE)]]
+  building_fire = fire_incident[basic_incident[,grep('111',INC_TYPE)]]
+  
   # need to cast INC_DATE as int type so that basic_incident and address can be joined
   address$INC_DATE = as.integer(address$INC_DATE)
   setkey(address, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
+  # orders the address data by these variables
+  setkey(basic_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
+  
+  # the originals had address[basic_incident[grep('111', INC_TYPE)]], but this caused 
+  # my row_seq data to be all NA.  Thus, resulting in empty data files.
+  
   # determines the addresses of the incidents that actually have fires
-  building_fire_address = address[basic_incident[grep('111', INC_TYPE)]]
+  building_fire_address = address[basic_incident[,grep('111', INC_TYPE)]]
+  
   # sets row_seq as the key
   setkey(building_fire_address, row_seq)
+  
+  # the originals did NOT have this line
   setkey(geocoded_address, row_seq)
+  
   # determine the geocoded addresses (the non-empty ones) of the building fires
   building_fire_address_geocoded = geocoded_address[building_fire_address][!is.na(row_seq)]
   # sorts by tract id and adds columns that counts the addresses within an ID??  That is, by_tract determines the number of incidents in a particular 'tract'
   by_tract = building_fire_address_geocoded[, .N, by = tractid][!is.na(tractid)]
+  
   setkey(by_tract, N)
   # save by_tract for later use in some folder called results
   saveRDS(by_tract, file = paste0(data_year, '_building_fire_per_1k.rds'))
   # reads in the census data
   tract_census_2010 = data.table(read.dbf("Tract_2010Census_DP1.dbf", as.is = TRUE))
+  
   # sorts by tractid
   setkey(by_tract, tractid)
   # sorts by GEOID10
   setkey(tract_census_2010, GEOID10)
   # this renames the variable DP0010001 to population
   setnames(tract_census_2010, 'DP0010001', 'population')
+  
   # creates a subset of the census data
   # determines which GEOID10 rows in tract_census_2010 are in by_tract
   tract_census_selected = merge(by_tract, tract_census_2010, by.x = 'tractid', by.y = 'GEOID10' )
