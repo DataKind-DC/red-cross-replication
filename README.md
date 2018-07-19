@@ -22,7 +22,7 @@ The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 re
 Progress Notes:  <a href="https://github.com/DataKind-DC/red-cross-2/blob/master/Progress%20Document.md">here</a>
 
 
-| Phase 1 Model  |  Status  | Next Steps | Issues
+| Phase 1 Model  |  Status  | Next Steps | Issues |
 |-------|---|---|---|---|
 |   1A  - Judy    | Verified by Judy (June 4, 2018) | Update model with new ACS & RC Home Fire Install data  |   |
 |   1B - Maria    | Verified  | Update model with new data  |  |
