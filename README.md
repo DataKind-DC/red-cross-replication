@@ -22,16 +22,28 @@ The first step of the Red Cross Phase 2 is to replicate and document  Phase 1 re
 Progress Notes:  <a href="https://github.com/DataKind-DC/red-cross-2/blob/master/Progress%20Document.md">here</a>
 
 
-| Phase 1 Model  |  Status  | Next Steps | Issues  |  Data Sources |
+| Phase 1 Model  |  Status  | Next Steps | Issues
 |-------|---|---|---|---|
-|   1A  - Judy    | Verified by Judy (June 4, 2018) | Update model with new ACS & RC Home Fire Install data  |   |   |
-|   1B - Maria    | Verified  | Update model with new data  |  |   |
-|   1C - Roland   |under replication (last update by Minh June 4, 2018) |  | Cannot find R script that creates results (Minh found code by Enigma) |   |
-|   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | How to find address_type in formatted_address data? |  |
-|   2C - Sherika  |  under replication (last update June 4, 2018: Sherika and Daniel) |   |  Issue with geo-coding| |
-|   3A - Manuel   |  under replication | | Missing input data: data/rdata/tract_data.Rdata   |   | 
+|   1A  - Judy    | Verified by Judy (June 4, 2018) | Update model with new ACS & RC Home Fire Install data  |   |
+|   1B - Maria    | Verified  | Update model with new data  |  |
+|   1C - Roland   |under replication (last update by Minh June 4, 2018) |   Cannot find R script that creates results (Minh found code by Enigma) |   |
+|   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | How to find address_type in formatted_address data? |
+|   2C - Sherika  |  under replication (last update June 4, 2018: Sherika and Daniel) |   |  Issue with geo-coding - translating to Python |
+|   3A - Manuel   |  Verified | |   |
+| Aggregate - Maria| Unable to Replicate  | Code works - update with new models  | May not be final code used by RCP1   |   |
+
+## Model Input-Output Relationships
 
 
+|Model | Input Data | Output Files | Output To... |
+|-------|------------|-------------|--------------|-|
+| 1A  | Homefire_SmokeAlarmInstalls.csv, ACS | smoke_alarm_risk_scores_1a.csv  | Aggregate  |
+| 1B  | 2009_2013_alarm_tract_data.csv, ACS  | tracts_74k_weighted_linear_preds_upsampled.csv | Aggregate  |
+| 1C  | AHS  | smoke_alarm_risk_scores_1c.csv  | Aggregate  |
+| 2A  | 2010 Census, fire_incident  | 2009_tract_building_fire_per_1k 2010_tract_building_fire_per_1k 2011_tract_building_fire_per_1k 2012_tract_building_fire_per_1k 2013_tract_building_fire_per_1k   | Aggregate  |
+| 2C  | RC disaster cases, 2010 census tract shape files, state fibs code file  | fires_per_tract  | Aggregate  |
+| 3A  | modeling_injury_dataset, ACS tract data  | results_tract  | Aggregate  |
+| Aggregate  | Output files from 1A, 1B, 1C, 2A, 2C, and 3A  |  risk_tract | Map  |
 
 ## DataKind DataCorps
 
