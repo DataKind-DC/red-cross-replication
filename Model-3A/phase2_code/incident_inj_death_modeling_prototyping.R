@@ -2,11 +2,11 @@
 rm(list = ls())
 gc()
 
-setwd("/Users/nickbecker/Documents/Github/arc_smoke_alarm")
+setwd("/Users/manueltonneau/Documents/DataKind/smoke_alarm_models-phase1/model_3a_casualty_given_fire")
 
 library(data.table)
 library(magrittr)
-source("models/model_3a_casualty_given_fire/code/general_purpose/unbalanced_downsample.r")
+source("code/general_purpose/unbalanced_downsample.r")
 
 library(caret)
 library(DMwR)
@@ -20,7 +20,7 @@ library(dplyr)
 #registerDoMC(cores = 2)
 
 
-load("data_from_david/inc.rdata")
+load("data/inc.rdata")
 setkey(inc, geoid)
 inc = inc[!is.na(geoid)]
 inc[,target:="no_inj"]
@@ -44,7 +44,7 @@ if(FALSE){
   # 0.002629008 0.013785997 0.983584994 
 }
 
-load("data_from_david/tract_data.Rdata") # sl - 74101 obs, 270 vars
+load("data/tract_data.Rdata") # sl - 74101 obs, 270 vars
 sl = data.table(sl)
 setnames(sl, names(sl), tolower(names(sl)))
 sl = sl[!is.na(geoid)]

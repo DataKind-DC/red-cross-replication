@@ -15,7 +15,10 @@ library(randomForest)
 # Load base data sets #
 #######################
 
-load("data/rdata/inc.rdata")
+setwd("/Users/manueltonneau/Documents/DataKind/smoke_alarm_models-phase1/model_3a_casualty_given_fire")
+
+
+load("data/inc.rdata")
 setkey(inc, geoid)
 inc = inc[!is.na(geoid)]
 inc[,target:="no_inj"]
@@ -24,7 +27,7 @@ inc[oth_death>0, target:="death"]
 
 class_prior = inc[,mean(target!="no_inj")]
 
-load("data/rdata/tract_data.Rdata") # sl - 74101 obs, 270 vars
+load("data/tract_data.Rdata") # sl - 74101 obs, 270 vars
 sl = data.table(sl)
 setnames(sl, names(sl), tolower(names(sl)))
 sl = sl[!is.na(geoid)]

@@ -13,7 +13,9 @@ gc()
 
 #' #### Getting setup
 # set directory for project
-setwd('set red-cross-2 path here')
+# setwd('set red-cross-2 path here')
+setwd('/Users/judyyang/GitHub/red-cross-2')
+
 
 # install libraries
 # install.packages('data.table') - OK
@@ -26,6 +28,8 @@ setwd('set red-cross-2 path here')
 # install.packages('randomForest')
 # install.packages("githubinstall") - OK
 # install_github('brooksandrew/Rsenal') 
+
+
 
 # load libraries
 library('Rsenal') 
@@ -160,6 +164,7 @@ acsCT_c[risk_1a>1, risk_1a:=1]
 
 write.table(acsCT_c[, .(risk_1a, state, cnty, tract, geoid2)], file='./phase1-results/smoke-alarm-risk-scores.csv', row.names=F, sep=',')
 
+write.table(acsCT_c[, .(risk_1a, state, cnty, tract, geoid2)], file='./phase2-replication/smoke-alarm-risk-scores.csv', row.names=F, sep=',')
 
 
 ########################################
