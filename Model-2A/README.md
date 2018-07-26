@@ -19,7 +19,7 @@ Data required to successfully run Model 2A:
 - **_geocoded_addresses.csv*: files that contain the geocoded addresses of buildings for each year, e.g. latitude and longitude coordinates for the address above according to (https://geocoding.geo.census.gov/geocoder/locations/address?form): X: -77.02605 Y: 38.89833
 - *basicincident.txt*: file contains information about any incidents reported by fire department, not necessarily involving a fire
 - *national_county.txt*: file contains national and state FIPS codes (a five-digit Federal Information Processing Standards code) for counties and county equivalent entities.  
-- *NFIRS_FireIncidents.csv*: file contains information about the incidents reported by fire departments to NFIRS that did involve a fire
+- *fire_incident.txt*: file contains information about the incidents reported by fire departments to NFIRS that did involve a fire
 - *Tract_2010Census_DP1.dbf*: 2010 census tract data 
 - *us2010trf.txt*: 2010 tract relationship file from census
 

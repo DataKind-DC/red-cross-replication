@@ -1,14 +1,12 @@
 ##############################################################################
-# GET_GEOCODES.R
+# GET_GEOCODES_PER_PHASE1_latlong.R
 #
 # Phase 2 Replication, 2018
 # S. Sylvester
 #
-# This script reverse geocodes lat-long coordinates to find census tracts.
-# The overall approach finds the tract polygons for each lat-long coordinate
-# and extracts census tract and block information from state tract shapefiles.
-# Coordinates that were not localized to a tract in a state shapefile were
-# reverse geocoded using the Phase 1 API technique.
+# This script reverse geocodes lat-long coordinates to find census tracts using
+# phase 1 gittered lat-long coordinates from 'Homefires' output file. Otherwise,
+# the code is exactly the same as in get_geocodes.R.
 #
 # Inputs:
 #     FTP TIGER/LINE shapefile, state census tract2010:
@@ -20,13 +18,12 @@
 #         under "National FIPS and GNIS Codes File" tab
 #         Manually downloaded and saved as a TXT file
 #
-#     2009-2014_RedCross_DisasterCases.csv
-#         Downloaded from Phase 1 data folder in the DKDC RC Google Drive
+#     2009-2014_Homefire_geo.csv
+#         Phase 1 output file
 #
 # Outputs:
-#     2009_2014_RedCross_DisasterCases_with_census_data.csv
-#         The original case data (2009-2014_RedCross_DisasterCases.csv) with
-#         census data as additional columns.
+#     censustract_per_phase1_latlong.csv
+#         Census information for each lat-long from phase 1 output 'Homefire'
 #############################################################################
 
 # Clear workspace
@@ -44,11 +41,12 @@ library(raster)
 
 # Set directories
 data_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/data"
+data_folder_original <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase1/output/original"
 output_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase2/output"
 
 # Load in data sets
 state_fips <- read.table(paste(data_folder,"/state_FIPs_codes.txt",sep = ''), header = TRUE, sep = "|")
-redcross_disaster_cases <- read.csv(paste(data_folder,"/2009-2014_RedCross_DisasterCases.csv",sep=''), stringsAsFactors = FALSE)
+latlong_df <- read.csv(paste(data_folder_original,"2009-2014_Homefire_geo.csv",sep="/"), stringsAsFactors = FALSE)
 dataset_state_list <- unique(redcross_disaster_cases$esri_state)
 
 # Build URLs for census.gov FTPing
@@ -191,6 +189,6 @@ redcross_disaster_cases$name_api[idx_remaining]  <- name
 
 # Write dataframe to CSV
 write.csv(redcross_disaster_cases,
-          file = paste(output_folder,"/2009_2014_RedCross_DisasterCases_with_census_data.csv", sep = ""),
+          file = paste(output_folder,"/censustract_per_phase1_latlong.csv", sep = ""),
           row.names = FALSE,
           na = "")
