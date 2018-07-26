@@ -1,3 +1,22 @@
+
+## July 25 2018 DataJam
+
+The team worked on identifying the input data for each model, specifically determining 1) where the target variable comes from; 2) where the explanatory variables come from; and c) the equivalent updated data sources. In many cases, it seems the updated data sources are not the same as the old data sources (eg variable names have changed). The team decided to start an abbreviated data dictionary of sorts.
+
+Tasks:
+
+ALL: Start filling out data dictionary (posted to GitHub as excel file).
+
+Roland: go through the Enigma code. Try and determine what it's doing and how it works. There is an email out to the Enigma team to see if they have updated ACS/AHS blend, but if not, the team may have to try and use their code.
+
+Maria: determine data sources for models 1a, 1b; sort through Red Cross data posted by Jake.
+
+Sherika: Work with volunteers to document NFIRS data and determine how the new .txt file data line up with previously used NRFIRS data.
+
+Amanda: NFIRS / Model 2A data documentation and matching
+
+Maria will also reach out to the volunteers who helped at the DataJam to determine if any are willing to help look through the non-priveleged data.
+
 ## July 18 2018 Corps meeting (World Bank)
 
 1) 1A, 1B, 2A, and 3A are all replicated and validated. 2C and 3A still have issues, but for now, we're putting that aside. The aggregate model code works and has been updated. We also verified that the output from the aggregate model is the correct file that inputs into the map.
@@ -16,7 +35,7 @@
 
 Next Steps:
 
-In the next week, we will look into understanding the data sources better. At the Data Jam on July 25, we will push forward with updating the models with new data (if we have it). Brian will continue to work on Map code. 
+In the next week, we will look into understanding the data sources better. At the Data Jam on July 25, we will push forward with updating the models with new data (if we have it). Brian will continue to work on Map code.
 
 <br>
 
