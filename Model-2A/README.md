@@ -13,12 +13,12 @@ The **input** are the data sets described below, and the **output** is a dataset
 - In phase2-code, you will find the work currently in progress by the Phase 2 Team.  At the moment, this is a copy of the phase1-code-model2a with comments throughout the file so that future may understand the code.  
 - In phase2-results, you will find the results for the phase2-code.  At the moment, this is the best version of replicated Phase 1 results.
 
-### Data ###
+### Input Data ###
 Data required to successfully run Model 2A:
 
 - **_formatted_addresses.csv*: files that contain the formatted addresses of buildings for each year, e.g. 1001 G Street Northwest, Washington, DC 20001
 - **_geocoded_addresses.csv*: files that contain the geocoded addresses of buildings for each year, e.g. latitude and longitude coordinates for the address above according to (https://geocoding.geo.census.gov/geocoder/locations/address?form): X: -77.02605 Y: 38.89833
-- **_basicincident.txt*: file contains information about any incidents reported by fire department, not necessarily involving a fire
+- **_basic_incident.txt*: file contains information about any incidents reported by fire department, not necessarily involving a fire
 - *national_county.txt*: file contains national and state FIPS codes (a five-digit Federal Information Processing Standards code) for counties and county equivalent entities.  
 - **_fire_incident.txt*: file contains information about the incidents reported by fire departments to NFIRS that did involve a fire
 - *Tract_2010Census_DP1.dbf*: 2010 census tract data 
