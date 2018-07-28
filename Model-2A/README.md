@@ -18,9 +18,9 @@ Data required to successfully run Model 2A:
 
 - **_formatted_addresses.csv*: files that contain the formatted addresses of buildings for each year, e.g. 1001 G Street Northwest, Washington, DC 20001
 - **_geocoded_addresses.csv*: files that contain the geocoded addresses of buildings for each year, e.g. latitude and longitude coordinates for the address above according to (https://geocoding.geo.census.gov/geocoder/locations/address?form): X: -77.02605 Y: 38.89833
-- *basicincident.txt*: file contains information about any incidents reported by fire department, not necessarily involving a fire
+- **_basicincident.txt*: file contains information about any incidents reported by fire department, not necessarily involving a fire
 - *national_county.txt*: file contains national and state FIPS codes (a five-digit Federal Information Processing Standards code) for counties and county equivalent entities.  
-- *fire_incident.txt*: file contains information about the incidents reported by fire departments to NFIRS that did involve a fire
+- **_fire_incident.txt*: file contains information about the incidents reported by fire departments to NFIRS that did involve a fire
 - *Tract_2010Census_DP1.dbf*: 2010 census tract data 
 - *us2010trf.txt*: 2010 tract relationship file from census
 
@@ -30,7 +30,7 @@ The data files are too large for this repo, so they are stored on the Google Dri
        
 |    |                                    Task                                    |                 Progress Notes                 | Check |
 |----|----------------------------------------------------------------------------|--------------------------------------------|-------|
-| 1. | Double check all input files are the same as the Originals for replication | This particular task has been attempted many times.  There was success once, and it was verified by a volunteer at one DataJam?  However, checking again, it seems there was a mistake along the way? Code works, and results are very close.  See phase2-results.| |
+| 1. | Double check all input files are the same as the Originals for replication | This particular task has been attempted many times.  There was success once, and it was verified by a volunteer at one DataJam?  However, checking again, it seems there was a mistake along the way? Code works, and results are very close.  See phase2-results. | |
 | 2. | Check the new NFIRS data has the same variable names and the same variable types | Need to email RC rep because the data does not match the fire_incident.txt or the basic_incident.txt | |
 | 3. | EDA with new NFIRS data | According to NFIRS documentation, there are several "modules", or datasets.  Including the basic_incident.txt and fire_incident.txt.  The new NFIRS 2009 - 2016 data seems to be some merge of these modules. | X |
 | 4. | Can the # of fires per 1000 people be calculated with the NFIRS data?  | | |
