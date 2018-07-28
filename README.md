@@ -27,7 +27,7 @@ Phase 1 Model  |  Status  | Next Steps | Issues
   1A  - Judy    | Verified by Judy (June 4, 2018) | Update model with new ACS & RC Home Fire Install data  |
    1B - Maria    | Verified  | Update model with new data  |
    1C - Roland   |under replication (last update by Minh June 4, 2018) |   Cannot find R script that creates results (Minh found code by Enigma) |
-   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | How to find address_type in formatted_address data?
+   2A - Amanda   | Verified by Lauren (June 4, 2018)   | Update model with new data   | 
    2C - Sherika  |  under replication (last update June 4, 2018: Sherika and Daniel) |   |  Issue with geo-coding - translating to Python
   3A - Manuel   |  Verified | |
  Aggregate - Maria| Unable to Replicate  | Code works - update with new models  | May not be final code used by RCP1
