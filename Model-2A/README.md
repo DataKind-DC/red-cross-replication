@@ -10,7 +10,8 @@ The **input** are the data sets described below, and the **output** is a dataset
 - In phase1-code-model2a, you will find the RMarkdown file (phase1-code-model2a.Rmd) which contains the code written by the originals.  The code uploads the data required, extracts information from both census and National Fire Incident Reporting System (NFIRS) data, and then calculates the proportion of fire incidents per 1000 people.  
     - The RMarkdown file, when compiled, will output a map of a state.  The most red areas have the highest rate of incident, and the lighter shades of red have lower rates of incident.
 - In phase1-results-model2a, you will find data files created by phase1-code-model2A.Rmd which contain all the tract information for the proportion.  Additionally, maps of Maryland for years 2009-2013 are saved in phase1-visualization-model2a.
-- In phase2-code, you will find the work currently in progress by the Phase 2 Team.  At the moment, this is a copy of the phase1-code-model2a with comments throughout the file so that future may understand the code.
+- In phase2-code, you will find the work currently in progress by the Phase 2 Team.  At the moment, this is a copy of the phase1-code-model2a with comments throughout the file so that future may understand the code.  
+- In phase2-results, you will find the results for the phase2-code.  At the moment, this is the best version of replicated Phase 1 results.
 
 ### Data ###
 Data required to successfully run Model 2A:
@@ -25,4 +26,12 @@ Data required to successfully run Model 2A:
 
 The data files are too large for this repo, so they are stored on the Google Drive: https://drive.google.com/open?id=14FSdOjsk2w9p3UlnntJFglOhXzLnCuT2
 
-
+### To Do ###
+       
+|    |                                    Task                                    |                 Progress                   |
+|----|----------------------------------------------------------------------------|--------------------------------------------|
+| 1. | Double check all input files are the same as the Originals for replication | This particular task has been completed many times.  There was success once, and it was verified by a volunteer at one DataJam?  However, checking again, it seems there was a mistake along the way? Code works, and results are very close.  See phase2-results.|
+| | | |
+| 2. | Check the new NFIRS data has the same variable names and the same variable types | Need to email RC rep because the data does not match the fire_incident.txt or the basic_incident.txt |
+| 3. | EDA with new NFIRS data | |
+| 4. | Can the # of fires per 1000 people be calculated with the NFIRS data?  | |
