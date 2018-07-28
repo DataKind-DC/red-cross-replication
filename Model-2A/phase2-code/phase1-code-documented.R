@@ -19,9 +19,11 @@ structure_fire_per_1k = function(data_year){
   # loads the R data containing the formatted addresses
   # data has 21 columns, variables including state, incident date, zip code, and address
   address = fread(paste0(data_year,'_formated_addresses.csv'))
+  
   #loads the R data containing the geocoded addresses
   # data has 13 columns, variables including longitude and latitude, county, and address
   geocoded_address = fread(paste0(data_year,"_geocoded_addresses.csv"))
+  
   # address type comes from the formatted address data
   # this line of code gives how many of each address type
   # note, 2010 does not have address type
@@ -32,33 +34,37 @@ structure_fire_per_1k = function(data_year){
   
   # load basic incident data -- basic incidents are any incidents the fire department is called for,
   # not necessarily resulting in fire
-  # data has variables like ALARM, ARRIVAL, INC_DATE
-  basic_incident = fread("basic_incident.txt", sep = "^")
-  # loads fire incident data -- calls that did have a fire
-  # data has 20 variables, including incident data, incident year, street, zip code, and address
+  # data has variables 41 variables like ALARM, ARRIVAL, INC_DATE
+  basic_incident = fread(paste0(data_year, "_basic_incident.txt"), sep = "^")
   
-  fire_incident = fread("fire_incident.txt", sep = "^")
+  # loads fire incident data -- calls that did have a fire
+  # data has 80 variables, including INC_DATE, AREA_ORIG, AGE, STRUC_STAT
+  fire_incident = fread(paste0(data_year, "_fire_incident.txt"), sep = "^")
+  
   # determine a list of tracts that are contained in the data
   tracts_covered = unique(geocoded_address[, tractid])
+  
   # save the results because it's needed for estimating NFIRS coverage.
   saveRDS(tracts_covered, file = paste0(data_year, '_tracts_covered.rds'))
   
   # determines which fire incidents were building fires based on the NFIRS code 111
   setkey(fire_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
   setkey(basic_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
-  # the originals had fire_incident[basic_incident[grep('111',INC_TYPE)]]
-  building_fire = fire_incident[basic_incident[,grep('111',INC_TYPE)]]
+  building_fire = fire_incident[basic_incident[grep('111',INC_TYPE)]]
   
   # need to cast INC_DATE as int type so that basic_incident and address can be joined
+  # the originials didn't seem to need to cast
   address$INC_DATE = as.integer(address$INC_DATE)
-  setkey(address, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
-  # orders the address data by these variables
+  
   setkey(basic_incident, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
+  setkey(address, STATE, FDID, INC_DATE, INC_NO, EXP_NO)
   
   # the originals had address[basic_incident[grep('111', INC_TYPE)]], but this caused 
   # my row_seq data to be all NA.  Thus, resulting in empty data files.
   
   # determines the addresses of the incidents that actually have fires
+  # orders the address data by these variables
+  
   building_fire_address = address[basic_incident[,grep('111', INC_TYPE)]]
   
   # sets row_seq as the key
