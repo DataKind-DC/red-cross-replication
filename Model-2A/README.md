@@ -31,7 +31,6 @@ The data files are too large for this repo, so they are stored on the Google Dri
 |    |                                    Task                                    |                 Progress                   |
 |----|----------------------------------------------------------------------------|--------------------------------------------|
 | 1. | Double check all input files are the same as the Originals for replication | This particular task has been completed many times.  There was success once, and it was verified by a volunteer at one DataJam?  However, checking again, it seems there was a mistake along the way? Code works, and results are very close.  See phase2-results.|
-| | | |
 | 2. | Check the new NFIRS data has the same variable names and the same variable types | Need to email RC rep because the data does not match the fire_incident.txt or the basic_incident.txt |
 | 3. | EDA with new NFIRS data | |
 | 4. | Can the # of fires per 1000 people be calculated with the NFIRS data?  | |
