@@ -43,8 +43,8 @@ library(raster)
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
 # Set directories
-data_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/data"
-output_folder <- "~/Documents/DKDC_RC/rcp2_repo/Model-2C/phase2/output"
+data_folder <- "~/Documents/DKDC_RC/data"
+output_folder <- "~/Documents/DKDC_RC/repo_v2/Model-2C/phase2/output"
 
 # Load in data sets
 state_fips <- read.table(paste(data_folder,"/state_FIPs_codes.txt",sep = ''), header = TRUE, sep = "|")
