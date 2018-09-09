@@ -1,7 +1,7 @@
 ##############################################################################
 # GET_CENSUSTRACT.R
 #
-# Phase 2 Replication, 2018
+# Red Cross Fire Alarm Phase 2 Replication, 2018
 # S. Sylvester
 #
 # This script reverse geocodes lat-long coordinates to find census tracts.
