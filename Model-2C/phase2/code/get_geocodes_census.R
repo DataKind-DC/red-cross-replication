@@ -126,8 +126,9 @@ if(length(list.files(geocode_save_path)) != 2*length(chunk_start)){
   
     chunked_addresses <- list.files(chunk_save_path)
     
-    tic <- Sys.time()
     for(i in chunk_nums){
+        tic <- Sys.time()
+        
         geocode_save_name <- paste0("geocodes_chunk",
                                     as.numeric(sub(".csv","",sub("NFIRS_addresses_chunk", "", chunked_addresses[i]))))
         data_chunk <- paste(chunk_save_path,chunked_addresses[i], sep = "/")
@@ -172,6 +173,7 @@ if(length(list.files(geocode_save_path)) != 2*length(chunk_start)){
         
         # Save stacked data frame as a CSV-file
         write.csv(temp_complete, file = paste(geocode_save_path,"/",geocode_save_name,".csv",sep = ""))
-        print(paste("Chunk", i, "out of", length(chunk_nums),"complete...", round(Sys.time() - tic,2),sep = " "))
+        print(paste("Saved",geocode_save_name,"| Chunk", i, "out of",
+                    length(chunk_nums),"complete...", round(Sys.time() - tic,2),sep = " "))
     }
 }
