@@ -33,4 +33,5 @@ The data files are too large for this repo, so they are stored on the Google Dri
 | 1. | Double check all input files are the same as the Originals for replication | Code works, and results are seemingly close.  See phase2-results.  Not as close as one might like, however. |  |
 | 2. | Check the new NFIRS data has the same variable names and the same variable types | Need to email RC rep because the data does not match the fire_incident.txt or the basic_incident.txt | X |
 | 3. | EDA with new NFIRS data | According to NFIRS documentation, there are several "modules", or datasets.  Including the basic_incident.txt and fire_incident.txt.  The new NFIRS 2009 - 2016 data seems to be some merge of these modules.  Waiting on email for more information. | X |
-| 4. | Can the # of fires per 1000 people be calculated with the NFIRS data?  | | |
+| 4. | Email clarification | RC rep said that we should expect the results to be different because the old data had flaws, where the new data is more accurate.  | X |
+| 5. | Rerun with new data.  Can the # of fires per 1000 people be calculated with the NFIRS data? | Modified code for the new NFIRS data, see phase-1-code-modified.R in phase2-code folder.  We do get results different than the Originals results.  BUT, the data is seemingly the same as *our* results from 1.| X |
