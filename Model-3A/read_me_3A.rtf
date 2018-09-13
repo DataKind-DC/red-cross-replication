@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red251\green2\blue7;\red102\green177\blue50;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c100000\c14913\c0;\cssrgb\c46532\c73327\c25364;\cssrgb\c0\c0\c0;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11700\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \ul \ulc2 READ-ME Model 3A:\cf0 \ulc0 \
+\ulnone \
+In the folder \'ab\'a0code\'a0\'bb, one can find 5 different R scripts:\
+- create_modeling_3a_datasets.R\
+- incident_filtering_merging_and_tract_assignment.R\
+- incident_inj_death_modeling_prototyping.R\
+- incident_inj_death_scoring.R\
+- model_3a.R\
+\
+and a folder called \'ab\'a0general_purpose\'a0\'bb containing 3 other R scripts used throughout the project:\
+- read_csv_to_dt.r\
+- standardize_variable_names.r\
+- unbalanced_downsample.r\
+\
+1) To begin with, one must run the: \cf3 \'ab\'a0create_modeling_3a_datasets.R\'a0\'bb\cf0 . \
+\
+There are two different parts in this piece of code. \
+\
+\ul In the first part:\ulnone \
+\
+The 
+\b inputs 
+\b0 comes from three different sources:\
+\
+- from https://drive.google.com/open?id=0BxhID98AlD4ZckpKd29nN3c4VE0 for the following files:\
+2009_formated_addresses.csv\
+2010_formated_addresses.csv\
+2011_formated_addresses.csv\
+2012_formated_addresses.csv\
+2013_formated_addresses.csv\
+\
+- from https://drive.google.com/open?id=0BxhID98AlD4ZckpKd29nN3c4VE0 for the following files:\
+2009_geocoded_addresses.csv\
+2010_geocoded_addresses.csv\
+2011_geocoded_addresses.csv\
+2012_geocoded_addresses.csv\
+2013_geocoded_addresses.csv\
+\
+- from https://drive.google.com/drive/folders/0BxhID98AlD4ZUVQxNEkyLXlVTE0 for the following files:\
+basic_incident.dbf\
+basic_incident.txt\
+\
+The 
+\b outputs
+\b0  are the following:\
+nfirs_outcomes_geo_clean_2009.Rdata\
+nfirs_outcomes_geo_clean_2010.Rdata\
+nfirs_outcomes_geo_clean_2011.Rdata\
+nfirs_outcomes_geo_clean_2012.Rdata\
+nfirs_outcomes_geo_clean_2013.Rdata\
+nfirs_outcomes_geo_clean_multi_year.Rdata\
+\
+\ul In the second part:\ulnone \
+\
+The 
+\b inputs 
+\b0 are:\
+- nfirs_outcomes_geo_clean_multi_year.Rdata and comes from the output of the first part of this code (check above).\
+- unbalanced_downsample.r (comes from the \'ab\'a0general_purpose\'a0\'bb folder in the \'ab\'a0code\'a0\'bb folder, mentioned above)\
+- acs_tract_data.csv This file is produced from this raw file (http://enigma-public.s3.amazonaws.com/projects/smoke-alarm-risk/data/acs.csv) and adapted thanks to Maria\'92s python code.\
+\
+The 
+\b outputs
+\b0  are:\
+- modeling_death_dataset_imp.csv\
+- modeling_injury_dataset_imp.csv\
+\
+2) The second code to run is called \cf3 \'ab\'a0incident_filtering_merging_and_tract_assignment.R\'a0\'bb\
+\
+\cf4 This piece of code is problematic as one of the input files is missing (still missing after reaching out to the author, Nick, and Judy). \
+We managed to find the output file though which made it possible to run the rest of the code.\
+\
+The 
+\b inputs
+\b0  are:\
+- 2015-09-16.RData (source: not found)\
+- zcta_tract_rel_10.txt (source: http://www2.census.gov/geo/docs/maps-data/data/rel/zcta_tract_rel_10.txt)\
+\
+The 
+\b outputs 
+\b0 are:\
+- inc.rdata (source: https://drive.google.com/drive/folders/0Bxt-Sxy6HRaxZzhyeFRkUVRvckE, found by Judy)\
+\
+3) The third code to run is called \cf3 \'ab\'a0incident_inj_death_modeling_prototyping.R\'a0\'bb\
+\
+\cf4 The 
+\b inputs
+\b0  are:\
+- unbalanced_downsample.r (\cf0 comes from the \'ab\'a0general_purpose\'a0\'bb folder in the \'ab\'a0code\'a0\'bb folder, mentioned above)\
+- \cf4 inc.rdata (source: https://drive.google.com/drive/folders/0Bxt-Sxy6HRaxZzhyeFRkUVRvckE, found by Judy)\
+- tract_data.Rdata (source: sent by Nick. Nick said \'ab\'a0It looks like that was created by a former team member named David Marx who had stored in a separate google drive.\'a0\cf0 \expnd0\expndtw0\kerning0
+I'm attaching my local copy of this binary file to this email since I can't upload to the `smokealarm` google drive. It looks like `inc.rdata` made it into the google drive (says uploaded by David Marx) but this one may not have.\cf4 \kerning1\expnd0\expndtw0 \'bb)\
+\
+The 
+\b outputs
+\b0  are:\
+mod_casualty_rf_prototype.Rdata\
+\
+4) The fourth code to run is called: \cf3 \'ab\'a0incident_inj_death_scoring.R\'a0\'bb\
+\
+\cf4 The 
+\b inputs 
+\b0 are:\
+- inc.rdata (source: https://drive.google.com/drive/folders/0Bxt-Sxy6HRaxZzhyeFRkUVRvckE, found by Judy)\
+- tract_data.Rdata (source: above, sent by Nick)\
+- mod_casualty_rf_prototype.Rdata (source: output of 3) )\
+\
+The 
+\b outputs
+\b0  are:\
+- results_tract.csv\
+\
+5) The fifth and final piece of code to run is \cf3 \'ab\'a0model_3a.R\'a0\'bb\cf4 \
+\
+The 
+\b inputs
+\b0  are:\
+- modeling_injury_dataset_imp.csv and modeling_death_dataset_imp.csv (source: output second part of 1) )\
+- acs_tract_data.csv (source: http://enigma-public.s3.amazonaws.com/projects/smoke-alarm-risk/data/acs.csv for acs.csv + Maria's Python code to adapt it )\
+\
+The 
+\b outputs
+\b0  are:\
+\
+- acs_tract_injury_predictions.csv\
+- acs_tract_death_injury_risk_scores.csv\
+- acs_tract_injury_rf_predictions.csv\
+- acs_tract_death_rf_predictions.csv\
+- acs_tract_death_injury_rf_risk_scores.csv\
+\
+\
+\ul Conclusion:\ulnone \
+\
+I have centralised all of the necessary files (that are not code, meaning except \cf0 unbalanced_downsample.r) in the following google drive: https://drive.google.com/drive/u/1/folders/1uSz99_AVjOZ3VxF5r-XhIWvDsZP7FyVX\
+I was able to run the code as is.\
+Don\'92t hesitate to reach out if you have any questions at manuel.tonneau@gmail.com \
+\
+\cf4 \
+\
+\cf0 \
+}
