@@ -129,51 +129,101 @@ if(length(list.files(geocode_save_path)) != 2*length(chunk_start)){
     for(i in chunk_nums){
         tic <- Sys.time()
         
-        geocode_save_name <- paste0("geocodes_chunk",
-                                    as.numeric(sub(".csv","",sub("NFIRS_addresses_chunk", "", chunked_addresses[i]))))
-        data_chunk <- paste(chunk_save_path,chunked_addresses[i], sep = "/")
-        req <- POST(apiurl,
-                    body = list(addressFile = upload_file(data_chunk),
-                                benchmark = "Public_AR_Current",
-                                vintage = "Current_Current"))
-        Sys.time() - tic #27.6 minutes
+        geocode_save_name <- paste0("geocodes_chunk",i)
+        data_chunk <- paste(chunk_save_path,paste0("NFIRS_addresses_chunk",i,".csv"), sep = "/")
         
-        temp0 <- rawToChar(req$content)
-        
-        # Save raw data as RDATA-file
-        save(temp0, file = paste(geocode_save_path,"/",geocode_save_name,".RData",sep = ""))
-        
-        temp0 <- strsplit(temp0,"\n")[[1]]
-        temp0 <-strsplit(temp0,'"')
-        list_length <- lengths(temp0, use.names = TRUE)
-        
-        # Process matches
-        idx <- which(list_length == max(unique(list_length)))
-        temp <- as.data.frame(t(as.data.frame(temp0[idx])))
-        row.names(temp) <- c()
-        temp <- temp[,seq(2,max(unique(list_length)),2)]
-        names(temp) <- c("ID","ADDRESS","MATCH","MATCH_TYPE","MATCHED_ADDRESS","LAT_LONG",
-                         "TIGER_LINE_ID","TIGER_LINE_SIDE","STATE_FIPS","COUNTY_FIPS",
-                         "CENSUS_TRACT","CENSUS_BLOCK")
-        temp_match <- temp
-        
-        # Process non-matches, fill empty fields with NA
-        idx <- which(list_length != max(unique(list_length)))
-        temp <- as.data.frame(t(as.data.frame(temp0[idx])))
-        row.names(temp) <- c()
-        temp <- temp[,seq(2,dim(temp)[2],2)]
-        names(temp) <- c("ID","ADDRESS","MATCH")
-        temp[,c("MATCH_TYPE","MATCHED_ADDRESS","LAT_LONG",
-                "TIGER_LINE_ID","TIGER_LINE_SIDE","STATE_FIPS","COUNTY_FIPS",
-                "CENSUS_TRACT","CENSUS_BLOCK")] <- NA
-        temp_noMatch <- temp
-        
-        # Stack matched and non-matched addresses
-        temp_complete <- rbind(temp_match,temp_noMatch)
-        
-        # Save stacked data frame as a CSV-file
-        write.csv(temp_complete, file = paste(geocode_save_path,"/",geocode_save_name,".csv",sep = ""))
-        print(paste("Saved",geocode_save_name,"| Chunk", i, "out of",
-                    length(chunk_nums),"complete...", round(Sys.time() - tic,2),sep = " "))
+        if(paste0("NFIRS_addresses_chunk",i,".csv") %in% chunked_addresses){
+            print(paste("Processing",paste0("NFIRS_addresses_chunk",i,".csv"),"..."))
+            
+          req <- POST(apiurl,
+                        body = list(addressFile = upload_file(data_chunk),
+                                    benchmark = "Public_AR_Current",
+                                    vintage = "Current_Current"))
+            Sys.time() - tic #27.6 minutes
+            
+            temp0 <- rawToChar(req$content)
+            
+            # Save raw data as RDATA-file
+            save(temp0, file = paste(geocode_save_path,"/",geocode_save_name,".RData",sep = ""))
+            
+            temp0 <- strsplit(temp0,"\n")[[1]]
+            temp0 <-strsplit(temp0,'"')
+            list_length <- lengths(temp0, use.names = TRUE)
+            
+            # Process matches
+            #idx <- which(list_length == max(unique(list_length)))
+            idx <- which(list_length == 24)
+            temp <- as.data.frame(t(as.data.frame(temp0[idx])))
+            row.names(temp) <- c()
+            temp <- temp[,seq(2,dim(temp)[2],2)]
+            names(temp) <- c("ID","ADDRESS","MATCH","MATCH_TYPE","MATCHED_ADDRESS","LAT_LONG",
+                             "TIGER_LINE_ID","TIGER_LINE_SIDE","STATE_FIPS","COUNTY_FIPS",
+                             "CENSUS_TRACT","CENSUS_BLOCK")
+            temp_match <- temp
+            
+            # Process non-matches, fill empty fields with NA
+            idx <- which(list_length != 24)
+            
+            if(length(unique(list_length)) != 2){
+                idx6 <- which(list_length == 6)
+                idx8 <- which(list_length == 8)
+                idx26 <- which(list_length == 26)
+                if(length(idx6) > 0){
+                    temp <- as.data.frame(t(as.data.frame(temp0[idx6])))
+                    row.names(temp) <- c()
+                    temp <- temp[,seq(2,dim(temp)[2],2)]
+                    names(temp) <- c("ID","ADDRESS","MATCH")
+                    temp6 <- temp
+                }
+                if(length(idx8) > 0){
+                  temp <- as.data.frame(t(as.data.frame(temp0[idx8])))
+                  row.names(temp) <- c()
+                  temp <- temp[,seq(2,dim(temp)[2],2)]
+                  temp$extra <- paste(temp$V4,temp$V6)
+                  temp <- temp[,c("V2","extra","V8")]
+                  names(temp) <- c("ID","ADDRESS","MATCH")
+                  temp8 <- temp
+                }
+                if(length(idx26) > 0){
+                  temp <- as.data.frame(t(as.data.frame(temp0[idx26])))
+                  row.names(temp) <- c()
+                  temp <- temp[,seq(2,dim(temp)[2],2)]
+                  temp$extra <- paste(temp$V4,temp$V6)
+                  temp <- temp[,c("V2","extra","V8","V10","V12","V14","V16","V18","V20","V22","V24","V26")]
+                  names(temp) <- c("ID","ADDRESS","MATCH","MATCH_TYPE","MATCHED_ADDRESS","LAT_LONG",
+                                   "TIGER_LINE_ID","TIGER_LINE_SIDE","STATE_FIPS","COUNTY_FIPS",
+                                   "CENSUS_TRACT","CENSUS_BLOCK")
+                  temp26 <- temp
+                }
+                if(length(idx6) > 0){
+                    temp_noMatch <- temp6
+                }
+                if(length(idx8) > 0){
+                    temp_noMatch <- rbind(temp_noMatch)
+                }
+            }
+            temp <- as.data.frame(t(as.data.frame(temp0[idx])))
+            row.names(temp) <- c()
+            temp <- temp[,seq(2,dim(temp)[2],2)]
+            names(temp) <- c("ID","ADDRESS","MATCH")
+            temp[,c("MATCH_TYPE","MATCHED_ADDRESS","LAT_LONG",
+                    "TIGER_LINE_ID","TIGER_LINE_SIDE","STATE_FIPS","COUNTY_FIPS",
+                    "CENSUS_TRACT","CENSUS_BLOCK")] <- NA
+            temp_noMatch <- temp
+            
+            # Stack matched and non-matched addresses
+            temp_complete <- rbind(temp_match,temp_noMatch)
+            
+            # Save stacked data frame as a CSV-file
+            write.csv(temp_complete, file = paste(geocode_save_path,"/",geocode_save_name,".csv",sep = ""))
+            print(paste("Saved",geocode_save_name,"| Chunk", i, "out of",
+                        length(chunk_nums),"complete...", round(Sys.time() - tic,2),sep = " "),
+                  row.names = FALSE)
+        }
     }
 }
+
+
+#redo_geocodes <- list.files(geocode_save_path)
+#save(redo_geocodes,file = "REDO_GEOCODE_LIST.RData")
+#deleted 10 & 11, this should be reflected in redo_geocodes
